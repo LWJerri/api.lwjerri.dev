@@ -182,12 +182,10 @@ fastify.get("/data", async (req: FastifyRequest, res: FastifyReply) => {
 
 fastify.post(
   "/counter",
-  async (req: FastifyRequest & { body: { numRangeBody: string; path: string } }, res: FastifyReply) => {
+  async (req: FastifyRequest & { body: { numRange: number; path: string } }, res: FastifyReply) => {
     const {
-      body: { numRangeBody, path },
+      body: { numRange, path },
     } = req;
-
-    const numRange = parseInt(numRangeBody);
 
     if (!numRange || !path || isNaN(numRange)) return res.status(403).send({ error: "Incorrect data." });
 
