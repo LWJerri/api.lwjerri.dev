@@ -199,13 +199,13 @@ fastify.post(
     }
 
     const currentTimeInMS = new Date().getTime();
-    const timeFromDb = findRequest.requestedAt.getTime() + 1000 * 5;
+    const timeFromDb = findRequest.requestedAt.getTime() + 1000 * 60 * 60;
 
     if (timeFromDb < currentTimeInMS && findRequest.path === path) {
       await prisma.statistics.create({ data: { numRange, path } });
     }
 
-    const views = await prisma.statistics.count();
+    const views = await prisma.statistics.count({ where: { path } });
 
     return await res.status(200).send({ views });
   },
