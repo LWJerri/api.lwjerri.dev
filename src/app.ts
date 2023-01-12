@@ -2,6 +2,7 @@ import "source-map-support/register";
 import dotenv from "dotenv";
 import Fastify, { FastifyReply, FastifyRequest } from "fastify";
 import { PrismaClient } from "@prisma/client";
+import cors from "@fastify/cors";
 
 dotenv.config();
 
@@ -211,6 +212,7 @@ fastify.post(
 );
 
 async function boot() {
+  await fastify.register(cors);
   await fastify.listen({ port: parseInt(process.env.PORT), host: "0.0.0.0" });
 }
 
