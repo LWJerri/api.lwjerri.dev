@@ -187,7 +187,8 @@ fastify.post(
       body: { numRange, path },
     } = req;
 
-    if (!numRange || !path || isNaN(numRange)) return res.status(403).send({ error: "Incorrect data." });
+    if (!numRange || numRange < 1 || !path || isNaN(numRange))
+      return res.status(403).send({ error: "Incorrect data." });
 
     let findRequest = await prisma.statistics.findFirst({
       where: { numRange, path },
