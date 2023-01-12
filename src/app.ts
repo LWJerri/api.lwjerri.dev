@@ -211,7 +211,7 @@ fastify.post(
 );
 
 async function boot() {
-  await fastify.listen({ port: parseInt(process.env.PORT) });
+  await fastify.listen({ port: parseInt(process.env.PORT), host: "0.0.0.0" });
 }
 
 boot();
