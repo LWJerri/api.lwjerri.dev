@@ -1,0 +1,18 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["extendedWhereUnique"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Statistics {
+  id          String   @id @default(cuid())
+  numRange    Int
+  path        String
+  requestedAt DateTime @default(now())
+
+  @@map("statistics")
+}
