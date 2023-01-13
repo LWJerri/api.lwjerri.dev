@@ -187,22 +187,27 @@ fastify.post(
       body: { numRange, path },
     } = req;
 
-    if (!numRange || numRange < 1 || !path || isNaN(numRange))
+    if (!numRange || numRange < 1 || !path || isNaN(numRange)) {
       return res.status(403).send({ error: "Incorrect data." });
-
-    let findRequest = await prisma.statistics.findFirst({
-      where: { numRange, path },
-      orderBy: { requestedAt: "desc" },
-    });
-
-    if (!findRequest) {
-      findRequest = await prisma.statistics.create({ data: { numRange, path } });
     }
 
-    const currentTimeInMS = new Date().getTime();
-    const timeFromDb = findRequest.requestedAt.getTime() + 1000 * 60 * 60;
+    if (numRange !== 1) {
+      let findRequest = await prisma.statistics.findFirst({
+        where: { numRange, path },
+        orderBy: { requestedAt: "desc" },
+      });
 
-    if (timeFromDb < currentTimeInMS && findRequest.path === path) {
+      if (!findRequest) {
+        findRequest = await prisma.statistics.create({ data: { numRange, path } });
+      }
+
+      const currentTimeInMS = new Date().getTime();
+      const timeFromDb = findRequest.requestedAt.getTime() + 1000 * 60 * 60;
+
+      if (timeFromDb < currentTimeInMS && findRequest.path === path) {
+        await prisma.statistics.create({ data: { numRange, path } });
+      }
+    } else {
       await prisma.statistics.create({ data: { numRange, path } });
     }
 
