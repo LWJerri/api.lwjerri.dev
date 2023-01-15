@@ -63,7 +63,7 @@ fastify.get("/data", async (req: FastifyRequest, res: FastifyReply) => {
       "Nest.js",
       "Nuxt.js",
       "BullMQ",
-      "Typeorm",
+      "TypeORM",
       "Prisma",
       "Node.js",
     ],
