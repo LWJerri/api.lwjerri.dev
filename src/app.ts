@@ -1,13 +1,13 @@
-import "source-map-support/register";
+import cors from "@fastify/cors";
+import { PrismaClient } from "@prisma/client";
 import dotenv from "dotenv";
 import Fastify, { FastifyReply, FastifyRequest } from "fastify";
-import { PrismaClient } from "@prisma/client";
-import cors from "@fastify/cors";
+import "source-map-support/register";
 
 dotenv.config();
 
 const prisma = new PrismaClient();
-const fastify = Fastify({ logger: true, bodyLimit: 1000000 });
+const fastify = Fastify({ logger: false });
 
 fastify.get("/data", async (req: FastifyRequest, res: FastifyReply) => {
   return await res.status(200).send({
