@@ -139,9 +139,9 @@ fastify.get("/data", async (req: FastifyRequest, res: FastifyReply) => {
         url: "https://dut-api.lwjerri.ml",
       },
       {
-        name: "PorychBot",
+        name: "PoruchBot",
         description:
-          "PorychBot developed special for volunteer organization. This bot performs a key function in the branch of getting help for people who have had to change their place of residence because of the war. This bot asks for basic information about the person, validates the data, searches the databases and prevents possible cheating of the organisation from re-registering. This is very high load bot.",
+          "PoruchBot developed special for volunteer organization. This bot performs a key function in the branch of getting help for people who have had to change their place of residence because of the war. This bot asks for basic information about the person, validates the data, searches the databases and prevents possible cheating of the organisation from re-registering. This is very high load bot.",
         stack: [
           "pnpm",
           "Visual Studio Code",
